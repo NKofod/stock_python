@@ -17,10 +17,13 @@ day = datetime.date.today().day
 month = datetime.date.today().month 
 year = datetime.date.today().year
 for i in stock_list: 
-    tmp = web.DataReader(i , 'av-intraday', start=datetime.datetime(2022,1,1),end=datetime.date.today(),api_key='QVEGLYRJUK0ABVMT')
-    ticker_list = [i] * len(tmp)
-    tmp['Ticker'] = ticker_list 
-    tmp.to_csv(f'./data/{i}_{year}_{month}_{day}.csv')
+    try: 
+        tmp = web.DataReader(i , 'av-intraday', start=datetime.datetime(2022,1,1),end=datetime.date.today(),api_key='QVEGLYRJUK0ABVMT')
+        ticker_list = [i] * len(tmp)
+        tmp['Ticker'] = ticker_list 
+        tmp.to_csv(f'./data/{i}_{year}_{month}_{day}.csv')
+    except ValueError:
+        pass 
     time.sleep(20)
 
 with open('env.json', "w") as outfile:
