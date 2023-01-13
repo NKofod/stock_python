@@ -29,10 +29,8 @@ jobs:
           git config --local user.name "gihub-actions" 
           git add --all 
           git commit -m "Add changes" -a 
-          echo "::set-output name=push::true" 
         shell: bash 
       - name: Push changes 
-        if: steps.commit.outputs.push == 'true' 
         uses: ad-m/github-push-action@master 
         with: 
           github_token: ${{secrets.GITHUB_TOKEN}}
