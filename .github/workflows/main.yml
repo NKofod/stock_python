@@ -1,0 +1,38 @@
+name: python_stock_fetcher 
+on:
+  schedule:
+    - cron: "55 13 * * *" #runs at 00:00 UTC everyday
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2# checkout the repository content to github runner.
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10' #install the python needed
+      - name: Install dependencies 
+        run: | 
+          python -m pip install --upgrade pip 
+          pip install -r requirements.txt
+      
+      - name: execute py script # run the run.py to get the latest data
+        run: |
+          python fetch.py
+      - name: Commit files 
+        id: commit 
+        run: |
+          git config --local user.email "action@github.com" 
+          git config --local user.name "gihub-actions" 
+          git add --all 
+          git commit -m "Add changes" -a 
+          echo "::ser-output name=push::true" 
+        shell: bash 
+      - name: Push changes 
+        if: steps.commit.outputs.push == 'true' 
+        uses: ad-m/github-push-action@master 
+        with: 
+          github_token: ${{secrets.GITHUB_TOKEN}}
