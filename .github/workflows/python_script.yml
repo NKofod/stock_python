@@ -1,7 +1,7 @@
 name: python_stock_fetcher 
 on:
   schedule:
-    - cron: "45 15 * * *" #runs at 00:00 UTC everyday
+    - cron: "5 20 * * *" #runs at 00:00 UTC everyday
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
           git config --local user.name "gihub-actions" 
           git add --all 
           git commit -m "Add changes" -a 
-          echo "::ser-output name=push::true" 
+          echo "::set-output name=push::true" 
         shell: bash 
       - name: Push changes 
         if: steps.commit.outputs.push == 'true' 
