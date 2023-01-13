@@ -1,7 +1,7 @@
 name: python_stock_fetcher 
 on:
   schedule:
-    - cron: "40 14 * * *" #runs at 00:00 UTC everyday
+    - cron: "30 15 * * *" #runs at 00:00 UTC everyday
 
 jobs:
   build:
