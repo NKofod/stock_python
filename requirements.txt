@@ -1,2 +1,2 @@
 pandas 
-pandas_datareader
+alpha_vantage
