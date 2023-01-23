@@ -1,11 +1,8 @@
 name: python_stock_fetcher 
 on:
   schedule:
-<<<<<<< HEAD
     - cron: "25 14 * * *" #runs at 00:00 UTC everyday
-=======
-    - cron: "55 15 * * *" #runs at 00:00 UTC everyday
->>>>>>> 3b8e9167 (Auto-update)
+
 
 jobs:
   build:
