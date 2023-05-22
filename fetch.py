@@ -32,17 +32,3 @@ for i in stock_list:
         pass 
     
     time.sleep(20)
-
-with open('env.json', "w") as outfile:
-    env_json_out = env_json
-    env_json_out['Current_day'] += 1 
-    json.dump(env_json_out,outfile)
-
-filelist = list(os.walk("./data/"))[0][2]
-filelist = [i for i in filelist if f"{year}_{month}_{day}" in i]
-tmp_df = pd.read_csv(f"./data/{filelist[0]}",index_col=False)
-
-for i in filelist[1:]:
-    tmp_df = pd.concat([tmp_df,pd.read_csv(f"./data/{i}",index_col=False)])
-    print(f"{i} - {len(tmp_df)}")
-tmp_df.to_csv(f"./collated/collated_{year}_{month}_{day}.csv",index=False)
